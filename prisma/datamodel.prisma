@@ -1,7 +1,28 @@
 type Link {
   id: ID! @id
-  createdAt: DateTime! @createdAt
-  updateAt: DateTime! @updatedAt
   description: String!
   url: String!
+  postedBy: User
+  votes: [Vote!]!
+  createdAt: DateTime! @createdAt
+  updateAt: DateTime! @updatedAt
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  links: [Link!]!
+  votes: [Vote!]!
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+}
+
+type Vote {
+  id: ID! @id
+  link: Link!
+  user: User!
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
 }
